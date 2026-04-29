@@ -26,7 +26,7 @@ public class ContactPoints {
     public ContactPoints(double x, double y, double radius, double objectRadius, Color color){
         this.x = x;
         this.y = y;
-        this.radius = radius;
+        this.radius = radius * 0.01;
         this.objectRadius = objectRadius;
 
         contacts = new GraphicsGroup();
@@ -39,16 +39,19 @@ public class ContactPoints {
         this.x = point.getX();
         this.y = point.getY();
         this.radius = radius;
+        this.objectRadius = objectRadius;
 
         contacts = new GraphicsGroup();
 
+        resetContactsPOS();
+        makeContacts();
     }
 
     public void resetContactsPOS(){
-        wPOS = new Point(x - objectRadius, y);
-        ePOS = new Point(x + objectRadius, y);
-        nPOS = new Point(x, y + objectRadius);
-        sPOS = new Point(x, y - objectRadius);
+        wPOS = new Point(x - (objectRadius), y);
+        ePOS = new Point(x + (objectRadius), y);
+        nPOS = new Point(x, y - (objectRadius));
+        sPOS = new Point(x, y + (objectRadius));
     }
 
     private void makeContacts(){
