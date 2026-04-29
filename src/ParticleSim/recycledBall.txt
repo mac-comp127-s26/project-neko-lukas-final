@@ -1,0 +1,232 @@
+package breakout;
+
+
+import edu.macalester.graphics.Ellipse;
+import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Point;
+
+
+import java.awt.Color;
+import java.util.List;
+
+
+
+public class Ball {
+//Private Variables
+    //Ball variables
+    private Ellipse ball;
+    private double x;
+    private double y;
+    private double radius;
+    private double speed;
+    private double direction;
+    private Double[] v;
+   
+    //Contact point variabels
+    private Color ballContactColor = new Color(255,0,0);
+    private double cRadius = 2;
+    private ContactPoints contacts;
+    // private Ellipse east;
+    // private Ellipse west;
+    // private Ellipse north;
+    // private Ellipse south;
+
+    //GraphicsGroup variables
+    private GraphicsGroup ballGroup = new GraphicsGroup();
+    
+
+
+//Functions_____________________________________________________________
+    public Ball(double x, double y, double radius){
+        //...Constructor. Sets private variables
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        v = new Double[2];
+        v[0] = 0.0;
+        v[1] = 1.0;
+
+        makeBall();
+    }
+   
+    private void makeBall(){
+        //...Consrtructs ball and contact points
+        ball = new Ellipse(x, y, 2*radius, 2*radius);
+        ball.setCenter(x, y);
+        ballGroup.add(ball);
+        ball.setFillColor(new Color(255,229,185));
+        ball.setStroked(false);
+
+        contacts = new ContactPoints(x, y, cRadius, radius, ballContactColor);
+       
+        //...Contact points construction:
+            //...Compass points
+            // west = new Ellipse(x, y, cRadius * 2, cRadius * 2);
+            // west.setCenter(x - radius, y);
+            // west.setFillColor(ballContactColor);
+            // east = new Ellipse(x, y, cRadius * 2, cRadius * 2);
+            // east.setCenter(x + radius, y);
+            // east.setFillColor(ballContactColor);
+            // north = new Ellipse(x, y, cRadius * 2, cRadius * 2);
+            // north.setCenter(x, y - radius);
+            // north.setFillColor(ballContactColor);
+            // south = new Ellipse(x, y, cRadius * 2, cRadius * 2);
+            // south.setCenter(x, y + radius);
+            // south.setFillColor(ballContactColor);
+            // ballGroup.add(west);
+            // ballGroup.add(east);
+            // ballGroup.add(north);
+            // ballGroup.add(south);
+        //...
+
+        // double cX = radius * Math.sin(45);
+        // double cY = radius * Math.cos(45);
+        // double deviationX = cX - x;
+        // double deviationY = cY - y;
+
+
+        // Ellipse southwest = new Ellipse(cX, cY, cRadius * 2, cRadius * 2);
+        // southwest.setCenter(cX, cY);
+        // southwest.setFillColor(ballContactColor);
+        // //Ellipse
+
+
+        // ballGroup.add(southwest);
+
+
+        //...Resets ball position
+        ballGroup.setCenter(x, y);
+    }
+
+
+    //...Graphics get methods
+        public GraphicsGroup getGraphicsGroup(){
+            return ballGroup;
+        }
+
+        public GraphicsGroup getContactsGroup(){
+            return contacts.getContactsGraphics();
+        }
+
+        public Ellipse getGraphicsEllipse(){
+            return ball;
+        }
+
+        public double getDirection(){
+            return direction;
+        }
+
+
+    //...Contact point get methods
+        public Ellipse west(){
+            return contacts.west();
+        }
+        public Point westCanvasPos(){
+            return contacts.westCanvasPos();
+        }
+
+        public Ellipse east(){
+            return contacts.east();
+        }
+        public Point eastCanvasPos(){
+            return contacts.eastCanvasPos();
+        }
+        
+        public Ellipse north(){
+            return contacts.north();
+        }
+        public Point northCanvasPos(){
+            return contacts.northCanvasPos();
+        }
+
+        public Ellipse south(){
+            return contacts.south();
+        }
+        public Point southCanvasPos(){
+            return contacts.southCanvasPos();
+        }
+
+
+    //...Ball private variable set methods
+        public void setSpeed(double speed){
+            //this.speed = speed;
+            v[0] = speed;
+            v[1] = speed;
+        }
+
+
+        public void setDirection(double direction){
+            this.direction = direction;
+        }
+       
+    //...Ball move methods
+        public void setCenter(double x, double y){
+            this.x = x;
+            this.y = y;
+        }
+        
+        public void move(){
+            //...360 direction
+                // double deviationX = speed * Math.sin(direction);
+                // double deviationY = speed * Math.cos(direction);
+            
+                // double newX = x + deviationX;
+                // double newY = y + deviationY;
+                // x = newX;
+                // y = newY;
+                // Point newPoint = new Point(x, y);
+                // contacts.moveContacts(newX, newY);
+            
+                // ballGroup.setCenter(newPoint);
+            //...
+            x += v[0];
+            y += v[1];
+
+            contacts.moveContacts(x, y);
+            ballGroup.setCenter(x, y);
+        }
+
+
+        public void deflection(int contact){
+        //...Returns a new direction for ball when ball impacts barrier
+        //...directional deflection
+            // if(contact == 1){//WEST
+            //     double newDirection = 360 - this.direction;
+            //     this.direction = newDirection;
+            // }
+            // else if(contact == 2){//NORTH
+            //     double newDirection = 180 - direction;
+            //     if(newDirection <= 270 && newDirection >= 90){
+            //         newDirection = 360 - direction;
+            //     }
+            //     this.direction = newDirection;
+            // }
+            // else if(contact == 3){//EAST
+            //     double newDirection = 360 - direction;
+            //     if(newDirection <= 360 && newDirection >= 180){
+            //         newDirection = 180 - direction;
+            //     }
+            //     this.direction = newDirection;
+            // }
+            //  else if(contact == 4){
+            //     double newDirection = 180 - direction;
+            //     if(newDirection >= 270 || newDirection <= 90){
+            //         newDirection = 180 - direction;
+            //     }
+            //     this.direction = newDirection;
+            // }
+            // else{
+            //     this.direction = 0;
+            // }
+            // if(this.direction >= 360){
+            //     this.direction = direction - 360;
+            // } else if(this.direction < 0){
+            //     this.direction = direction + 360;
+            // }
+        //...
+
+        if(contact == 1 || contact == 3){v[0] = v[0] * -1;}
+        if(contact == 2 || contact == 4){v[1] = v[1] * -1;}
+    }
+}
+
