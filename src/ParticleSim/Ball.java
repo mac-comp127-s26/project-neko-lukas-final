@@ -2,6 +2,7 @@ package ParticleSim;
 
 
 import edu.macalester.graphics.Ellipse;
+import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 
@@ -22,13 +23,17 @@ public class Ball {
         private Double[] v;
     //...
 
+    //...ball other variables
+        private Boolean inBounds;
+    //...
+
     //...sim canvas variables
         private static final int CANVAS_HEIGHT = ParticleSim.getCANVAS_HEIGHT();
         private static final int CANVAS_WIDTH = ParticleSim.getCANVAS_WIDTH();
         private static final double CANVAS_BOUND = ParticleSim.getBound();
     //...
    
-    //Contact point variabels
+    //Contact point variables
         private Color ballContactColor = new Color(255,0,0);
         private double cRadius = 2;
         private ContactPoints contacts;
@@ -45,6 +50,8 @@ public class Ball {
         v = new Double[2];
         v[0] = 0.0;
         v[1] = 1.0;
+
+        inBounds = true;
 
         makeBall();
     }
@@ -63,8 +70,11 @@ public class Ball {
         ballGroup.setCenter(x, y);
     }
 
+    //...ball variable get methods
+        public Boolean getInBounds(){return inBounds;}
+    //...
 
-    //...Graphics get methods
+    //...get Graphics methods
         public GraphicsGroup getGraphicsGroup(){
             return ballGroup;
         }
@@ -83,28 +93,28 @@ public class Ball {
     //...
 
     //...Contact point get methods
-        public Ellipse west(){
+        public Rectangle west(){
             return contacts.west();
         }
         public Point westCanvasPos(){
             return contacts.westCanvasPos();
         }
 
-        public Ellipse east(){
+        public Rectangle east(){
             return contacts.east();
         }
         public Point eastCanvasPos(){
             return contacts.eastCanvasPos();
         }
         
-        public Ellipse north(){
+        public Rectangle north(){
             return contacts.north();
         }
         public Point northCanvasPos(){
             return contacts.northCanvasPos();
         }
 
-        public Ellipse south(){
+        public Rectangle south(){
             return contacts.south();
         }
         public Point southCanvasPos(){
@@ -119,8 +129,8 @@ public class Ball {
             v[1] = 0.0;
         }
 
-        public void setGravity(double gravity){
-            this.gravity = gravity;
+        public static void setGravity(double igravity){
+            gravity = igravity;
         }
 
         public void setDirection(double direction){
@@ -140,21 +150,38 @@ public class Ball {
             v[1] = v[1] - gravity * 0.01;
             
             checkVelocity();
+            checkOutOfBounds();
+
             contacts.moveContacts(x, y);
             ballGroup.setCenter(x, y);
         }
 
         public void deflection(int contact){
-            if(contact == 1 || contact == 3){v[0] = v[0] * -0.8;}
-            
-            if(contact == 2 || contact == 4){
-                if(contact == 2){y = CANVAS_HEIGHT - (CANVAS_BOUND + radius + 0.1);}
-                v[0] = v[0] * 0.9;
-                v[1] = v[1] * -0.5;}
+            //...Bound bouncing
+                if(contact == 1 || contact == 3){v[0] = v[0] * -0.8;}
+                if(contact == 2 || contact == 4){
+                    if(contact == 4){y = CANVAS_HEIGHT - (CANVAS_BOUND + radius + 0.1);}
+                    v[0] = v[0] * 0.9;
+                    v[1] = v[1] * -0.5;}
+            //...
+
+            //...Ball bouncing
+                    //..to be implemented
+            //...
         }
 
         private void checkVelocity(){
+            //...Stop horizontal movement if ball is going slow enough    
             if(v[0]<0.03){v[0] = 0.0;}
+        }
+    //...
+
+    //...Ball position checks
+        private void checkOutOfBounds(){
+            //...check if ball is out of bounds
+                if(y > CANVAS_HEIGHT || y < 0 || x > CANVAS_WIDTH || x < 0)
+                    {inBounds = false; System.out.println("OUT OF BOUNDS");}
+            //...
         }
     //...
 }

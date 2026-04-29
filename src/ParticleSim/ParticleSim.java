@@ -1,11 +1,14 @@
 package ParticleSim;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The game of Breakout.
@@ -20,7 +23,8 @@ public class ParticleSim {
     private static GraphicsGroup physicsLayer;
     private static GraphicsGroup ballLayer;
 
-    private static Ball ball;
+    //private static Ball ball;
+    private static List<Ball> balls;
     private static Point bPOS;
     private static double speed;
     private static String moving;
@@ -39,6 +43,7 @@ public class ParticleSim {
         //...Set object variables Variables
             physicsLayer = new GraphicsGroup();
             ballLayer = new GraphicsGroup();
+            balls = new ArrayList<Ball>();
             speed = 5;
             gravity = -9.81;
             moving = "true";
@@ -62,19 +67,25 @@ public class ParticleSim {
         //...Animation
             canvas.animate(() -> {
                 //moving variable determines gamestate
-                System.out.println("animate");
 
                 //...Ball is in motion
                     if(moving == "true"){
-                        ball.move();
-                        barrierCollisionCheck();
-                        outOfBoundsCheck();
+                        for(Ball ball : balls){
+                            ball.move();
+                            checkCollision(ball);
+                            if(ball.getInBounds() == false){
+                                ball.getContactsGroup().removeAll();
+                                ball.getGraphicsGroup().removeAll();
+                                balls.remove(ball);
+                            }
+                        }
                     }
                 //...
                 
                 //...ball has gone out of bounds
                     else if(moving == "ball OOB"){
                         resetBall();
+                        System.out.println("BALL OOB");
                         moving = "true";
                     }
                 //...
@@ -98,9 +109,10 @@ public class ParticleSim {
     }
 
     private static void constructBall(){
-        ball = new Ball(bPOS.getX(), bPOS.getY(), 7.5);
+        Ball ball = new Ball(bPOS.getX(), bPOS.getY(), 7.5);
+        balls.add(ball);
         ballLayer.add(ball.getGraphicsGroup());
-        ballLayer.add(ball.getContactsGroup());
+        //ballLayer.add(ball.getContactsGroup());
         canvas.add(ballLayer);
         ball.setSpeed(speed);
         ball.setGravity(gravity);
@@ -108,14 +120,13 @@ public class ParticleSim {
 
     private static void resetBall() {
         //...Places the ball's position above platform
-            ballLayer.removeAll();
             moving = "ball OOB";
             bPOS = new Point(150,150);
             constructBall();
         //...
     }
 
-    private static void barrierCollisionCheck(){
+    private static void checkCollision(Ball ball){
         //...Barrier collision check & deflection
             boolean countactWest = physicsLayer.getElementAt(ball.westCanvasPos()) instanceof Rectangle;
             boolean countactNorth = physicsLayer.getElementAt(ball.northCanvasPos()) instanceof Rectangle;
@@ -127,15 +138,17 @@ public class ParticleSim {
             if(countactEast){ball.deflection(3); System.out.println("CONTACT 3");}
             if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
-    }
 
-    private static void outOfBoundsCheck(){
-        //...check if ball is out of bounds
-            if(ball.getGraphicsGroup().getCenter().getY() > CANVAS_HEIGHT
-            || ball.getGraphicsGroup().getCenter().getY() < 0
-            || ball.getGraphicsGroup().getCenter().getX() > CANVAS_WIDTH
-            || ball.getGraphicsGroup().getCenter().getX() < 0
-                ){moving = "ball OOB"; System.out.println("OUT OF BOUNDS"); resetBall();}
+        //...Ball collision check & deflection
+            countactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
+            countactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
+            countactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
+            countactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
+                
+            if(countactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
+            if(countactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
+            if(countactEast){ball.deflection(3); System.out.println("CONTACT 3");}
+            if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
     }
 
