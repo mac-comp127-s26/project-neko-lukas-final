@@ -11,8 +11,11 @@ import java.awt.Color;
  * The game of Breakout.
  */
 public class ParticleSim {
+    private static double gravity;
+
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 600;
+    private static double bound = 10;
     private static CanvasWindow canvas;
     private static GraphicsGroup physicsLayer;
     private static GraphicsGroup ballLayer;
@@ -37,6 +40,7 @@ public class ParticleSim {
             physicsLayer = new GraphicsGroup();
             ballLayer = new GraphicsGroup();
             speed = 5;
+            gravity = -9.81;
             moving = "true";
         //...
 
@@ -47,12 +51,8 @@ public class ParticleSim {
             constructBall();
         //...
 
-        //...Set platform movement event
-            canvas.onMouseMove(event -> {
-                double mouseX = event.getPosition().getX();
-                double southWallY = CANVAS_HEIGHT - 10 * 3;
-                southWall.getGraphics().setCenter(mouseX, southWallY);
-            });
+        //...Reset ball on click
+            canvas.onMouseDown(event -> {resetBall();});
         //...
     }
 
@@ -84,12 +84,10 @@ public class ParticleSim {
 
     private static void constructBounds(){
         //...places edge barriers and movable platform (southWall is the platform)
-            double bound = 10;
             westWall = new Barrier(0, 0, bound, CANVAS_HEIGHT);
             eastWall = new Barrier(CANVAS_WIDTH - bound, 0, bound, CANVAS_HEIGHT);
             northWall = new Barrier(0, 0, CANVAS_WIDTH, bound);
-            //southWall = new Barrier(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
-            southWall = new Barrier(300, CANVAS_HEIGHT - bound * 3, bound * 8, bound);
+            southWall = new Barrier(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
             
             physicsLayer.add(westWall.getGraphics());
             physicsLayer.add(eastWall.getGraphics());
@@ -105,14 +103,14 @@ public class ParticleSim {
         ballLayer.add(ball.getContactsGroup());
         canvas.add(ballLayer);
         ball.setSpeed(speed);
+        ball.setGravity(gravity);
     }
 
     private static void resetBall() {
         //...Places the ball's position above platform
             ballLayer.removeAll();
             moving = "ball OOB";
-            bPOS = new Point(southWall.getGraphics().getCenter().getX() - 50, 
-                            southWall.getGraphics().getCenter().getY() - 50);
+            bPOS = new Point(150,150);
             constructBall();
         //...
     }
@@ -140,4 +138,10 @@ public class ParticleSim {
                 ){moving = "ball OOB"; System.out.println("OUT OF BOUNDS"); resetBall();}
         //...
     }
+
+    //...Canvas variable get methods
+        public static int getCANVAS_HEIGHT(){return CANVAS_HEIGHT;}
+        public static int getCANVAS_WIDTH(){return CANVAS_WIDTH;}
+        public static double getBound(){return bound;}
+    //...
 }
