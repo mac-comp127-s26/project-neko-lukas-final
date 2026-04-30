@@ -126,7 +126,7 @@ public class ParticleSim {
     }
 
     private static void checkCollision(Ball ball){
-        //...Barrier collision check & deflection
+        //...Barrier collision check & deflection | somehow spawns another circle when screen is clicked
             boolean countactWest = physicsLayer.getElementAt(ball.westCanvasPos()) instanceof Rectangle;
             boolean countactNorth = physicsLayer.getElementAt(ball.northCanvasPos()) instanceof Rectangle;
             boolean countactEast = physicsLayer.getElementAt(ball.eastCanvasPos()) instanceof Rectangle;
@@ -139,16 +139,15 @@ public class ParticleSim {
         //...
 
         //...Ball collision check & deflection
-            countactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
-            System.out.println(ball.westCanvasPos());
-            countactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
-            countactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
-            countactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
+            boolean ballCountactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
+            boolean ballCountactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
+            boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
+            boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
-            if(countactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
-            if(countactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
-            if(countactEast){ball.deflection(3); System.out.println("CONTACT 3");}
-            if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
+            if(ballCountactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
+            if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
+            if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
+            if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
     }
 

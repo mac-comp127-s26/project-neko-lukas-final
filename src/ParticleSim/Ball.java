@@ -4,7 +4,7 @@ package ParticleSim;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
-
+import edu.macalester.graphics.Rectangle;
 
 import java.awt.Color;
 
@@ -92,28 +92,28 @@ public class Ball {
     //...
 
     //...Contact point get methods
-        public Ellipse west(){
+        public Rectangle west(){
             return contacts.west();
         }
         public Point westCanvasPos(){
             return contacts.westCanvasPos();
         }
 
-        public Ellipse east(){
+        public Rectangle east(){
             return contacts.east();
         }
         public Point eastCanvasPos(){
             return contacts.eastCanvasPos();
         }
         
-        public Ellipse north(){
+        public Rectangle north(){
             return contacts.north();
         }
         public Point northCanvasPos(){
             return contacts.northCanvasPos();
         }
 
-        public Ellipse south(){
+        public Rectangle south(){
             return contacts.south();
         }
         public Point southCanvasPos(){
