@@ -29,10 +29,10 @@ public class ParticleSim {
     private static double speed;
     private static String moving;
     
-    private static Barrier westWall;
-    private static Barrier eastWall;
-    private static Barrier northWall;
-    private static Barrier southWall;
+    private static Rectangle westWall;
+    private static Rectangle eastWall;
+    private static Rectangle northWall;
+    private static Rectangle southWall;
 
 
 
@@ -51,8 +51,7 @@ public class ParticleSim {
 
         //...Construct game objects
             constructBounds();
-            bPOS = new Point(southWall.getGraphics().getCenter().getX() - 50, 
-                             southWall.getGraphics().getCenter().getY() - 50);
+            bPOS = new Point(150,100);
             //constructBall();
         //...
 
@@ -94,15 +93,25 @@ public class ParticleSim {
 
     private static void constructBounds(){
         //...places edge barriers and movable platform (southWall is the platform)
-            westWall = new Barrier(0, 0, bound, CANVAS_HEIGHT);
-            eastWall = new Barrier(CANVAS_WIDTH - bound, 0, bound, CANVAS_HEIGHT);
-            northWall = new Barrier(0, 0, CANVAS_WIDTH, bound);
-            southWall = new Barrier(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
+            westWall = new Rectangle(0, 0, bound, CANVAS_HEIGHT);
+            eastWall = new Rectangle(CANVAS_WIDTH - bound, 0, bound, CANVAS_HEIGHT);
+            northWall = new Rectangle(0, 0, CANVAS_WIDTH, bound);
+            //southWall = new Rectangle(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
+            southWall = new Rectangle(0, 200, CANVAS_WIDTH, bound);
+
+            westWall.setFillColor(new Color(223,144,66));
+            westWall.setStroked(false);
+            eastWall.setFillColor(new Color(223,144,66));
+            eastWall.setStroked(false);
+            northWall.setFillColor(new Color(223,144,66));
+            northWall.setStroked(false);
+            southWall.setFillColor(new Color(223,144,66));
+            southWall.setStroked(false);
             
-            physicsLayer.add(westWall.getGraphics());
-            physicsLayer.add(eastWall.getGraphics());
-            physicsLayer.add(northWall.getGraphics());
-            physicsLayer.add(southWall.getGraphics());
+            physicsLayer.add(westWall);
+            physicsLayer.add(eastWall);
+            physicsLayer.add(northWall);
+            physicsLayer.add(southWall);
             canvas.add(physicsLayer);
         //...
     }
