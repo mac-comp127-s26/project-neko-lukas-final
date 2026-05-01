@@ -124,7 +124,7 @@ public class Ball {
     //...Ball private variable set methods
         public void setSpeed(double speed){
             //this.speed = speed;
-            v[0] = 5.0;
+            v[0] = 9.0;
             v[1] = 0.0;
         }
 
@@ -155,26 +155,22 @@ public class Ball {
             ballGroup.setCenter(x, y);
         }
 
-        public void deflection(int contact){
+        public void deflection(String contact){
             //...Bound bouncing
-                if(contact == 1 || contact == 3){ //something about this is wrong
-                    //x -= v[0]; //prevents clipping after contact, this is flawed new solution needed
-                    v[0] = v[0] * -1;} //should change the horizontal direction
-                    //v[1] = v[1] * 0.9;} //vertical energy lost through friction
-                if(contact == 2 || contact == 4){
+                if(contact == "west" || contact == "east"){ //something about this is wrong
+                    x -= v[0]; //prevents clipping after contact, this is flawed
+                    v[0] = v[0] * -0.5; //should change the horizontal direction
+                    v[1] = v[1] * 0.9;} //vertical energy lost through friction
+                if(contact == "north" || contact == "south"){
                     y -= v[1]; 
                     v[0] = v[0] * 0.9; //horizontal energy ost through friction
                     v[1] = v[1] * -0.5;} 
-            //...
-
-            //...Ball bouncing
-                    //..to be implemented
             //...
         }
 
         private void checkVelocity(){
             //...Stop horizontal movement if ball is going slow enough    
-            if(v[0]<0.03){v[0] = 0.0;}
+            if(v[0]<0.03 && v[0]>-0.03){v[0] = 0.0;}
         }
     //...
 

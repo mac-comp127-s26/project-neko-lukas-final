@@ -96,8 +96,7 @@ public class ParticleSim {
             westWall = new Rectangle(0, 0, bound, CANVAS_HEIGHT);
             eastWall = new Rectangle(CANVAS_WIDTH - bound, 0, bound, CANVAS_HEIGHT);
             northWall = new Rectangle(0, 0, CANVAS_WIDTH, bound);
-            //southWall = new Rectangle(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
-            southWall = new Rectangle(0, 200, CANVAS_WIDTH, bound);
+            southWall = new Rectangle(0, CANVAS_HEIGHT - bound, CANVAS_WIDTH, bound);
 
             westWall.setFillColor(new Color(223,144,66));
             westWall.setStroked(false);
@@ -140,10 +139,10 @@ public class ParticleSim {
             boolean countactEast = physicsLayer.getElementAt(ball.eastCanvasPos()) instanceof Rectangle;
             boolean countactSouth = physicsLayer.getElementAt(ball.southCanvasPos()) instanceof Rectangle;
                 
-            if(countactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
-            if(countactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
-            if(countactEast){ball.deflection(3); System.out.println("CONTACT 3");}
-            if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
+            if(countactWest){ball.deflection("west"); System.out.println("CONTACT 1");} 
+            if(countactNorth){ball.deflection("north"); System.out.println("CONTACT 2");}
+            if(countactEast){ball.deflection("east"); System.out.println("CONTACT 3");}
+            if(countactSouth){ball.deflection("south"); System.out.println("CONTACT 4");}
         //...
 
         //...Ball collision check & deflection | does not work properly
@@ -152,10 +151,10 @@ public class ParticleSim {
             boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
             boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
-            if(ballCountactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
-            if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
-            if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
-            if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
+            if(ballCountactWest){ball.deflection("west"); System.out.println("CONTACT 1");} 
+            if(ballCountactNorth){ball.deflection("north"); System.out.println("CONTACT 2");}
+            if(ballCountactEast){ball.deflection("east"); System.out.println("CONTACT 3");}
+            if(ballCountactSouth){ball.deflection("south"); System.out.println("CONTACT 4");}
         //...
     }
 
