@@ -157,11 +157,8 @@ public class Ball {
 
         public void deflection(int contact){
             //...Bound bouncing
-                if(contact == 1 || contact == 3){v[0] = v[0] * -0.8;}
-                if(contact == 2 || contact == 4){
-                    if(contact == 4){y = CANVAS_HEIGHT - (CANVAS_BOUND + radius + 0.1);}
-                    v[0] = v[0] * 0.9;
-                    v[1] = v[1] * -0.5;}
+                if(contact == 1 || contact == 3){x -= v[0]; v[0] = v[0] * -0.5; v[1] = v[1] * 0.9;}
+                if(contact == 2 || contact == 4){y -= v[1]; v[0] = v[0] * 0.9; v[1] = v[1] * -0.5;}
             //...
 
             //...Ball bouncing

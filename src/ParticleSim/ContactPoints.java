@@ -28,7 +28,7 @@ public class ContactPoints {
         this.x = x;
         this.y = y;
         this.radius = radius * 0.01;
-        this.objectRadius = objectRadius + 0.01;
+        this.objectRadius = objectRadius + 1;
 
         contacts = new GraphicsGroup();
 

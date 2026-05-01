@@ -37,7 +37,7 @@ public class ParticleSim {
 
 
     public ParticleSim() {
-        canvas = new CanvasWindow("Breakout!", CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas = new CanvasWindow("particle sim", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(new Color(0,0,0));
 
         //...Set object variables Variables
@@ -53,11 +53,11 @@ public class ParticleSim {
             constructBounds();
             bPOS = new Point(southWall.getGraphics().getCenter().getX() - 50, 
                              southWall.getGraphics().getCenter().getY() - 50);
-            constructBall();
+            //constructBall();
         //...
 
         //...Reset ball on click
-            canvas.onMouseDown(event -> {resetBall();});
+            canvas.onMouseDown(event -> {spawnBall();});
         //...
     }
 
@@ -84,7 +84,7 @@ public class ParticleSim {
                 
                 //...ball has gone out of bounds
                     else if(moving == "ball OOB"){
-                        resetBall();
+                        spawnBall();
                         moving = "true";
                     }
                 //...
@@ -117,16 +117,15 @@ public class ParticleSim {
         ball.setGravity(gravity);
     }
 
-    private static void resetBall() {
+    private static void spawnBall() {
         //...Places the ball's position above platform
-            moving = "ball OOB";
             bPOS = new Point(150,150);
             constructBall();
         //...
     }
 
     private static void checkCollision(Ball ball){
-        //...Barrier collision check & deflection | somehow spawns another circle when screen is clicked
+        //...Barrier collision check & deflection
             boolean countactWest = physicsLayer.getElementAt(ball.westCanvasPos()) instanceof Rectangle;
             boolean countactNorth = physicsLayer.getElementAt(ball.northCanvasPos()) instanceof Rectangle;
             boolean countactEast = physicsLayer.getElementAt(ball.eastCanvasPos()) instanceof Rectangle;
@@ -138,16 +137,16 @@ public class ParticleSim {
             if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
 
-        //...Ball collision check & deflection
+        //...Ball collision check & deflection | somehow spawns another circle when screen is clicked
             boolean ballCountactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
             boolean ballCountactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
             boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
             boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
             if(ballCountactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
-            if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
-            if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
-            if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
+            // if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
+            // if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
+            // if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
     }
 
