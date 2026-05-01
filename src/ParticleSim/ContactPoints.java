@@ -99,7 +99,6 @@ public class ContactPoints {
     public void moveContacts(double x, double y){
         this.x = x;
         this.y = y;
-        contacts.setCenter(x, y);
         resetContactsPOS();
     }
 
