@@ -124,7 +124,7 @@ public class Ball {
     //...Ball private variable set methods
         public void setSpeed(double speed){
             //this.speed = speed;
-            v[0] = 1.0;
+            v[0] = 10.0;
             v[1] = 0.0;
         }
 
@@ -157,8 +157,14 @@ public class Ball {
 
         public void deflection(int contact){
             //...Bound bouncing
-                if(contact == 1 || contact == 3){x -= v[0]; v[0] = v[0] * -0.5; v[1] = v[1] * 0.9;}
-                if(contact == 2 || contact == 4){y -= v[1]; v[0] = v[0] * 0.9; v[1] = v[1] * -0.5;}
+                if(contact == 1 || contact == 3){ //something about this is wrong
+                    x -= v[0]; //prevents clipping after contact, this is flawed new solution needed
+                    v[0] = v[0] * -0.5; //should
+                    v[1] = v[1] * 0.9;} //vertical energy lost through friction
+                if(contact == 2 || contact == 4){
+                    y -= v[1]; 
+                    v[0] = v[0] * 0.9; 
+                    v[1] = v[1] * -0.5;}
             //...
 
             //...Ball bouncing

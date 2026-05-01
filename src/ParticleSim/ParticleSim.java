@@ -137,16 +137,16 @@ public class ParticleSim {
             if(countactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
 
-        //...Ball collision check & deflection | somehow spawns another circle when screen is clicked
+        //...Ball collision check & deflection | does not work properly
             boolean ballCountactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
             boolean ballCountactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
             boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
             boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
             if(ballCountactWest){ball.deflection(1); System.out.println("CONTACT 1");} 
-            // if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
-            // if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
-            // if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
+            if(ballCountactNorth){ball.deflection(2); System.out.println("CONTACT 2");}
+            if(ballCountactEast){ball.deflection(3); System.out.println("CONTACT 3");}
+            if(ballCountactSouth){ball.deflection(4); System.out.println("CONTACT 4");}
         //...
     }
 
