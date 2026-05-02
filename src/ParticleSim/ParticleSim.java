@@ -73,8 +73,8 @@ public class ParticleSim {
                             ball.move();
                             checkCollision(ball);
                             if(ball.getInBounds() == false){
-                                ball.getContactsGroup().removeAll();
-                                ball.getGraphicsGroup().removeAll();
+                                canvas.remove(ball.getContactsGroup());
+                                canvas.remove(ball.getGraphicsGroup());
                                 balls.remove(ball);
                             }
                         }
@@ -145,16 +145,28 @@ public class ParticleSim {
             if(countactSouth){ball.deflection("south"); System.out.println("CONTACT 4");}
         //...
 
-        //...Ball collision check & deflection | does not work properly
+        //...simple Ball collision check & deflection | does not work properly
             boolean ballCountactWest = ballLayer.getElementAt(ball.westCanvasPos()) instanceof Ellipse;
             boolean ballCountactNorth = ballLayer.getElementAt(ball.northCanvasPos()) instanceof Ellipse;
             boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
             boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
-            if(ballCountactWest){ball.deflection("west"); System.out.println("CONTACT 1");} 
-            if(ballCountactNorth){ball.deflection("north"); System.out.println("CONTACT 2");}
-            if(ballCountactEast){ball.deflection("east"); System.out.println("CONTACT 3");}
-            if(ballCountactSouth){ball.deflection("south"); System.out.println("CONTACT 4");}
+            if(ballCountactWest){ball.deflection("bwest"); System.out.println("CONTACT 1");} 
+            if(ballCountactNorth){ball.deflection("bnorth"); System.out.println("CONTACT 2");}
+            if(ballCountactEast){ball.deflection("beast"); System.out.println("CONTACT 3");}
+            if(ballCountactSouth){ball.deflection("bsouth"); System.out.println("CONTACT 4");}
+        //...
+
+        //...complicated Ball collision check & deflection | does not work properly
+            // for(Ball otherBall : balls){
+            //     if(otherBall == ball) continue;
+                
+            //     double dx = ball.getContactsGroup().getX() - otherBall.getContactsGroup().getX();
+            //     double dy = ball.getContactsGroup().getY() - otherBall.getContactsGroup().getY();
+            //     double distance = Math.sqrt(dx * dx + dy * dy);
+
+            //     if (distance < ball.getRadius()){}
+            // }
         //...
     }
 

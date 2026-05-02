@@ -71,54 +71,28 @@ public class Ball {
 
     //...ball variable get methods
         public Boolean getInBounds(){return inBounds;}
+        public Double getRadius(){return radius;}
     //...
 
     //...get Graphics methods
-        public GraphicsGroup getGraphicsGroup(){
-            return ballGroup;
-        }
-
-        public GraphicsGroup getContactsGroup(){
-            return contacts.getContactsGraphics();
-        }
-
-        public Ellipse getGraphicsEllipse(){
-            return ball;
-        }
-
-        public double getDirection(){
-            return direction;
-        }
+        public GraphicsGroup getGraphicsGroup(){return ballGroup; }
+        public GraphicsGroup getContactsGroup(){return contacts.getContactsGraphics();}
+        public Ellipse getGraphicsEllipse(){ return ball;}
+        public double getDirection(){return direction;}
     //...
 
     //...Contact point get methods
-        public Rectangle west(){
-            return contacts.west();
-        }
-        public Point westCanvasPos(){
-            return contacts.westCanvasPos();
-        }
-
-        public Rectangle east(){
-            return contacts.east();
-        }
-        public Point eastCanvasPos(){
-            return contacts.eastCanvasPos();
-        }
+        public Rectangle west(){return contacts.west();}
+        public Point westCanvasPos(){return contacts.westCanvasPos();}
+       
+        public Rectangle east(){return contacts.east();}
+        public Point eastCanvasPos(){return contacts.eastCanvasPos();}
         
-        public Rectangle north(){
-            return contacts.north();
-        }
-        public Point northCanvasPos(){
-            return contacts.northCanvasPos();
-        }
+        public Rectangle north(){return contacts.north();}
+        public Point northCanvasPos(){ return contacts.northCanvasPos();}
 
-        public Rectangle south(){
-            return contacts.south();
-        }
-        public Point southCanvasPos(){
-            return contacts.southCanvasPos();
-        }
+        public Rectangle south(){return contacts.south();}
+        public Point southCanvasPos(){return contacts.southCanvasPos();}
     //...
 
     //...Ball private variable set methods
@@ -128,13 +102,9 @@ public class Ball {
             v[1] = 0.0;
         }
 
-        public static void setGravity(double igravity){
-            gravity = igravity;
-        }
+        public static void setGravity(double igravity){ gravity = igravity;}
 
-        public void setDirection(double direction){
-            this.direction = direction;
-        }
+        public void setDirection(double direction){this.direction = direction;}
     //...
 
     //...Ball move methods
@@ -156,21 +126,32 @@ public class Ball {
         }
 
         public void deflection(String contact){
-            //...Bound bouncing
-                if(contact == "west" || contact == "east"){ //something about this is wrong
+            //...bound bouncing
+                if(contact == "west" || contact == "east"){
                     x -= v[0]; //prevents clipping after contact, this is flawed
-                    v[0] = v[0] * -0.5; //should change the horizontal direction
+                    v[0] = v[0] * -0.5;
                     v[1] = v[1] * 0.9;} //vertical energy lost through friction
                 if(contact == "north" || contact == "south"){
                     y -= v[1]; 
                     v[0] = v[0] * 0.9; //horizontal energy ost through friction
                     v[1] = v[1] * -0.5;} 
             //...
+
+            //...ball bouncing
+                if(contact == "bwest" || contact == "beast"){ //something about this is wrong
+                    v[0] = v[0] * -0.5;
+                    v[1] = v[1] * 0.9;} //vertical energy lost through friction
+                if(contact == "bnorth" || contact == "bsouth"){
+                    y -= v[1]; 
+                    v[0] = v[0] * 0.9; //horizontal energy ost through friction
+                    v[1] = v[1] * -0.5;}
+            //...
         }
 
         private void checkVelocity(){
-            //...Stop horizontal movement if ball is going slow enough    
+            //...Stops movement if ball is going slow enough    
             if(v[0]<0.03 && v[0]>-0.03){v[0] = 0.0;}
+            if(v[1]<0.03 && v[1]>-0.03){v[1] = 0.0;}
         }
     //...
 
