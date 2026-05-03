@@ -56,7 +56,7 @@ public class ParticleSim {
         //...
 
         //...Reset ball on click
-            canvas.onMouseDown(event -> {spawnBall();});
+            canvas.onMouseDown(event -> {spawnBall(event.getPosition());}); //NEKO
         //...
     }
 
@@ -83,7 +83,7 @@ public class ParticleSim {
                 
                 //...ball has gone out of bounds
                     else if(moving == "ball OOB"){
-                        spawnBall();
+                        spawnBall(bPOS);           //NEKO
                         moving = "true";
                     }
                 //...
@@ -125,9 +125,9 @@ public class ParticleSim {
         ball.setGravity(gravity);
     }
 
-    private static void spawnBall() {
+    private static void spawnBall(Point location) { // NEKO
         //...Places the ball's position above platform
-            bPOS = new Point(150,150);
+            bPOS = location;
             constructBall();
         //...
     }
