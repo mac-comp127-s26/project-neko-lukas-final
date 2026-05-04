@@ -20,6 +20,7 @@ public class Ball {
         private double radius;
         private double direction;
         private Double[] v;
+        private Boolean moving = true;
     //...
 
     //...ball other variables
@@ -72,6 +73,7 @@ public class Ball {
     //...ball variable get methods
         public Boolean getInBounds(){return inBounds;}
         public Double getRadius(){return radius;}
+        public Boolean isMoving(){return moving;}
     //...
 
     //...get Graphics methods
@@ -138,13 +140,26 @@ public class Ball {
             //...
 
             //...ball bouncing
-                if(contact == "bwest" || contact == "beast"){ //something about this is wrong
-                    v[0] = v[0] * -0.5;
-                    v[1] = v[1] * 0.9;} //vertical energy lost through friction
-                if(contact == "bnorth" || contact == "bsouth"){
-                    y -= v[1]; 
-                    v[0] = v[0] * 0.9; //horizontal energy ost through friction
-                    v[1] = v[1] * -0.5;}
+                if(contact == "bwest"){ 
+                    if(v[0]<0){ //if this ball initiates contact
+                        x -= v[0]; //prevents clipping after contact
+                        v[0] = v[0] * -0.5; //change direction and lose energy through friction & imperfect elasticity
+                        v[1] = v[1] * 0.9;}} //vertical energy lost through friction
+                if(contact == "beast"){ 
+                    if(v[0]>0){ //if this ball initiates contact
+                        x -= v[0]; //prevents clipping after contact
+                        v[0] = v[0] * -0.5; //change direction and lose energy through friction & imperfect elasticity
+                        v[1] = v[1] * 0.9;}} //vertical energy lost through friction
+                if(contact == "bnorth"){
+                    if(v[1]<0){//If this ball initiates contact
+                        y -= v[1]; //prevents clipping after contact
+                        v[0] = v[0] * 0.9; //horizontal energy lost through friction
+                        v[1] = v[1] * -0.5;}} //change direction and lose energy through friction and imperfect elasticity
+                if(contact == "bsouth"){
+                    if(v[1]>0){//If this ball initiates contact
+                        y -= v[1]; //prevents clipping after contact
+                        v[0] = v[0] * 0.9; //horizontal energy lost through friction
+                        v[1] = v[1] * -0.5;}} //change direction and lose energy through friction and imperfect elasticity
             //...
         }
 
@@ -152,6 +167,7 @@ public class Ball {
             //...Stops movement if ball is going slow enough    
             if(v[0]<0.03 && v[0]>-0.03){v[0] = 0.0;}
             if(v[1]<0.03 && v[1]>-0.03){v[1] = 0.0;}
+            if(v[1] == 0 || v[0] == 0){}
         }
     //...
 
