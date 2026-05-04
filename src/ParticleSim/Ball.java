@@ -128,11 +128,11 @@ public class Ball {
         public void deflection(String contact){
             //...bound bouncing
                 if(contact == "west" || contact == "east"){
-                    x -= v[0]; //prevents clipping after contact, this is flawed
+                    x -= v[0]; //prevents clipping after contact
                     v[0] = v[0] * -0.5;
                     v[1] = v[1] * 0.9;} //vertical energy lost through friction
                 if(contact == "north" || contact == "south"){
-                    y -= v[1]; 
+                    y -= v[1]; //prevents clipping after contact
                     v[0] = v[0] * 0.9; //horizontal energy ost through friction
                     v[1] = v[1] * -0.5;} 
             //...
