@@ -3,7 +3,6 @@ package ParticleSim;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
@@ -83,7 +82,7 @@ public class ParticleSim {
                 
                 //...ball has gone out of bounds
                     else if(moving == "ball OOB"){
-                        spawnBall(bPOS);           //NEKO
+                        spawnBall(bPOS);
                         moving = "true";
                     }
                 //...
@@ -123,6 +122,7 @@ public class ParticleSim {
         canvas.add(ballLayer);
         ball.setSpeed(speed);
         ball.setGravity(gravity);
+        ball.setDirection(315);
     }
 
     private static void spawnBall(Point location) { // NEKO
@@ -139,10 +139,10 @@ public class ParticleSim {
             boolean countactEast = physicsLayer.getElementAt(ball.eastCanvasPos()) instanceof Rectangle;
             boolean countactSouth = physicsLayer.getElementAt(ball.southCanvasPos()) instanceof Rectangle;
                 
-            if(countactWest){ball.deflection("west"); System.out.println("CONTACT 1");} 
-            if(countactNorth){ball.deflection("north"); System.out.println("CONTACT 2");}
-            if(countactEast){ball.deflection("east"); System.out.println("CONTACT 3");}
-            if(countactSouth){ball.deflection("south"); System.out.println("CONTACT 4");}
+            if(countactWest){ball.deflection("west");} 
+            if(countactNorth){ball.deflection("north");}
+            if(countactEast){ball.deflection("east");}
+            if(countactSouth){ball.deflection("south");}
         //...
 
         //...simple Ball collision check & deflection | does not work properly
@@ -151,10 +151,10 @@ public class ParticleSim {
             boolean ballCountactEast = ballLayer.getElementAt(ball.eastCanvasPos()) instanceof Ellipse;
             boolean ballCountactSouth = ballLayer.getElementAt(ball.southCanvasPos()) instanceof Ellipse;
                 
-            if(ballCountactWest){ball.deflection("bwest"); System.out.println("CONTACT 1");} 
-            if(ballCountactNorth){ball.deflection("bnorth"); System.out.println("CONTACT 2");}
-            if(ballCountactEast){ball.deflection("beast"); System.out.println("CONTACT 3");}
-            if(ballCountactSouth){ball.deflection("bsouth"); System.out.println("CONTACT 4");}
+            if(ballCountactWest){ball.deflection("bwest");} 
+            if(ballCountactNorth){ball.deflection("bnorth");}
+            if(ballCountactEast){ball.deflection("beast");}
+            if(ballCountactSouth){ball.deflection("bsouth");}
         //...
 
         //...complicated Ball collision check & deflection | does not work properly
