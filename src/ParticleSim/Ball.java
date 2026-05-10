@@ -23,6 +23,7 @@ public class Ball {
 
     //...ball other variables
         private Ellipse ball;
+        private static Color ballColor;
         private Boolean inBounds;
         private Boolean moving = true; //Unused currently. Intended to be used to determine if a ball is not in motion so it can be removed at least temporarily from the balls list to reduce computational load when there are many balls
     //...
@@ -98,14 +99,9 @@ public class Ball {
     //...
 
     //...Ball private variable set methods
-        public void setSpeed(double speed){
-            //this.speed = speed;
-            v[0] = 9.0;
-            v[1] = 0.0;
-        }
-
+        public void setxVelocity(double speed){v[0] = speed;}
+        public void setyVelocity(double speed){v[1] = speed;}
         public static void setGravity(double igravity){ gravity = igravity;}
-
         public void setDirection(double direction){this.direction = direction;}
     //...
 

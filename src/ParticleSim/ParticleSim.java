@@ -15,23 +15,33 @@ import java.util.List;
 public class ParticleSim {
     private static double gravity;
 
-    private static final int CANVAS_WIDTH = 600;
-    private static final int CANVAS_HEIGHT = 600;
-    private static double bound = 10;
-    private static CanvasWindow canvas;
-    private static GraphicsGroup physicsLayer;
-    private static GraphicsGroup ballLayer;
+    //...canvas variables
+        private static final int CANVAS_WIDTH = 800;
+        private static final int CANVAS_HEIGHT = 600;
+        private static final int UI_WIDTH = 200;
+        private static double bound = 10;
+        private static CanvasWindow canvas;
+        private static GraphicsGroup physicsLayer;
+        private static GraphicsGroup ballLayer;
+    //...
+        
+    //...canvas components
+        private static AppUI AppUI;
+        private static Rectangle westWall;
+        private static Rectangle eastWall;
+        private static Rectangle northWall;
+        private static Rectangle southWall;
+    //...
 
-    //private static Ball ball;
-    private static List<Ball> balls;
-    private static Point bPOS;
-    private static double speed;
-    private static String moving;
+    //...ball variables
+        private static List<Ball> balls;
+        private static Point bPOS;
+        private static double speed;
+        private static Boolean moving;
+    //...
     
-    private static Rectangle westWall;
-    private static Rectangle eastWall;
-    private static Rectangle northWall;
-    private static Rectangle southWall;
+
+    
 
 
 
@@ -45,17 +55,18 @@ public class ParticleSim {
             balls = new ArrayList<Ball>();
             speed = 5;
             gravity = -9.81;
-            moving = "true";
+            moving = true;
+            bPOS = new Point(150,100);
         //...
 
         //...Construct game objects
             constructBounds();
-            bPOS = new Point(150,100);
-            //constructBall();
+            AppUI = new AppUI(60);
+            canvas.add(AppUI, 30, 10);;
         //...
 
-        //...Reset ball on click
-            canvas.onMouseDown(event -> {spawnBall(event.getPosition());}); //NEKO
+        //...Function defintion: spawn ball on click during animation
+            canvas.onMouseDown(event -> {spawnBall(event.getPosition());});
         //...
     }
 
@@ -67,7 +78,7 @@ public class ParticleSim {
                 //moving variable determines gamestate
 
                 //...Ball is in motion
-                    if(moving == "true"){
+                    if(moving == true){
                         for(Ball ball : balls){
                             ball.move();
                             checkCollision(ball);
@@ -77,13 +88,6 @@ public class ParticleSim {
                                 balls.remove(ball);
                             }
                         }
-                    }
-                //...
-                
-                //...ball has gone out of bounds
-                    else if(moving == "ball OOB"){
-                        spawnBall(bPOS);
-                        moving = "true";
                     }
                 //...
             });
@@ -120,7 +124,8 @@ public class ParticleSim {
         ballLayer.add(ball.getGraphicsGroup());
         ballLayer.add(ball.getContactsGroup());
         canvas.add(ballLayer);
-        ball.setSpeed(speed);
+        ball.setxVelocity(speed);
+        ball.setyVelocity(0);
         ball.setGravity(gravity);
         ball.setDirection(315);
     }
