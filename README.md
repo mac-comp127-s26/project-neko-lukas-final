@@ -28,4 +28,4 @@ Slides:
     [Slides](https://docs.google.com/presentation/d/1iLJSXT_JGiU2sEZUs0BkPeVr10GaUH2guYb60kq3R8k/edit?usp=sharing)
 
 Presentation Video: 
-    https://youtu.be/824ffqXisUQ
+    (https://youtu.be/824ffqXisUQ)
