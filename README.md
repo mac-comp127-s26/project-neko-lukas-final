@@ -23,3 +23,6 @@ Known issues:
 
 Societal Impact:
     This project was not written with accessibility in mind. However, its simplicity lends itself to being relatively accessible. Its largest discriminating limitations is the requirement of sight and requiring the use of a mouse. As an entirely visual application, someone without sight will not be able to use the application, and there is no audio description feature. Other neccessities are access to a pc and internet, which not everyone is fortunte enough to have. Otherwise, there are no possible unintended consquences or malicious/oppressive situations. 
+
+Slides:
+    [Slides](https://docs.google.com/presentation/d/1iLJSXT_JGiU2sEZUs0BkPeVr10GaUH2guYb60kq3R8k/edit?usp=sharing)
