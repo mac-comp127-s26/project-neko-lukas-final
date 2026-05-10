@@ -197,26 +197,7 @@ public class Ball {
             //...
 
             //...ball bouncing
-                // if(contact == "bwest"){ 
-                //     if(v[0]<0){ //if this ball initiates contact
-                //         x -= v[0]; //prevents clipping after contact
-                //         v[0] = v[0] * -0.5; //change direction and lose energy through friction & imperfect elasticity
-                //         v[1] = v[1] * 0.9;}} //vertical energy lost through friction
-                // if(contact == "beast"){ 
-                //     if(v[0]>0){ //if this ball initiates contact
-                //         x -= v[0]; //prevents clipping after contact
-                //         v[0] = v[0] * -0.5; //change direction and lose energy through friction & imperfect elasticity
-                //         v[1] = v[1] * 0.9;}} //vertical energy lost through friction
-                // if(contact == "bnorth"){
-                //     if(v[1]<0){//If this ball initiates contact
-                //         y -= v[1]; //prevents clipping after contact
-                //         v[0] = v[0] * 0.9; //horizontal energy lost through friction
-                //         v[1] = v[1] * -0.5;}} //change direction and lose energy through friction and imperfect elasticity
-                // if(contact == "bsouth"){
-                //     if(v[1]>0){//If this ball initiates contact
-                //         y -= v[1]; //prevents clipping after contact
-                //         v[0] = v[0] * 0.9; //horizontal energy lost through friction
-                //         v[1] = v[1] * -0.5;}} //change direction and lose energy through friction and imperfect elasticity
+                //...
             //...
         }
 
