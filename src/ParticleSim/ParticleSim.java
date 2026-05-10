@@ -18,7 +18,6 @@ public class ParticleSim {
     //...canvas variables
         private static final int CANVAS_WIDTH = 800;
         private static final int CANVAS_HEIGHT = 600;
-        private static final int UI_WIDTH = 200;
         private static double bound = 10;
         private static CanvasWindow canvas;
         private static GraphicsGroup physicsLayer;
@@ -26,7 +25,6 @@ public class ParticleSim {
     //...
         
     //...canvas components
-        private static AppUI AppUI;
         private static Rectangle westWall;
         private static Rectangle eastWall;
         private static Rectangle northWall;
@@ -61,8 +59,6 @@ public class ParticleSim {
 
         //...Construct game objects
             constructBounds();
-            AppUI = new AppUI(60);
-            canvas.add(AppUI, 30, 10);;
         //...
 
         //...Function defintion: spawn ball on click during animation
