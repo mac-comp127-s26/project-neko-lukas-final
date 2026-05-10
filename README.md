@@ -12,7 +12,6 @@ Reference Acknowledgements:
     Homework References:
         - Breakout served as a starting point to be adapted into a new application.
         - In the Bubbles homework, cannon ball was used as reference when it came to incorporating gravity.
-        - The painter app homework was used as reference for UI
 
 Known issues:
     - Kilt graphics was not made optimized for this usage, so performance is poor. The program runs well when there are 0 to 14 active balls, but performance begins to somewhat decline from 15 to 20, and severely declines beyond 20.
