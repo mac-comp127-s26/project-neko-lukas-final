@@ -101,11 +101,11 @@ public class Ball {
     //...Ball private variable set methods
         public void setSpeed(double speed){
             this.speed = speed;
-            v[0] = 9.0;
+            v[0] = 0.0;
             v[1] = 0.0;
         }
 
-        public static void setGravity(double igravity){gravity = igravity;}
+        public static void setGravity(double igravity){gravity = igravity * -0.1;}
         public void setDirection(double direction){this.direction = direction;}
     //...
 
